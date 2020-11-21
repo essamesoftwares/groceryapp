@@ -37,6 +37,7 @@ class _CategoryPageState extends State<CategoryPage> {
           DATA[individualKey]['image'],
           DATA[individualKey]['type'],
           DATA[individualKey]['description'],
+          DATA[individualKey]['kgs'],
         );
         productList.add(products);
       }
@@ -105,6 +106,7 @@ class _CategoryPageState extends State<CategoryPage> {
                         productList[index].image,
                         productList[index].type,
                         productList[index].description,
+                        productList[index].kgs,
                       );
                     })),
       ),
@@ -119,15 +121,16 @@ class _CategoryPageState extends State<CategoryPage> {
     String image,
     String type,
     String description,
+    String kgs,
   ) {
     return GestureDetector(
       onTap: () {},
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
+        child: ListView(
           children: <Widget>[
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(25)),
+              borderRadius: BorderRadius.all(Radius.circular(10)),
               child: Stack(
                 children: <Widget>[
                   Container(
@@ -142,25 +145,29 @@ class _CategoryPageState extends State<CategoryPage> {
               ),
             ),
             Text(
-              pName,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.black),
-            ),
-            Text(
               description,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.black),
+                  fontStyle: FontStyle.italic,
+                  fontSize: 8,
+                  color: Colors.black54),
             ),
-            Text(
-              price,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: Colors.black),
+            Center(
+              child: Text(
+                pName,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.black),
+              ),
+            ),
+            Center(
+              child: Text(
+                "$kgs kg/kgs Rs. $price",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.black),
+              ),
             )
           ],
         ),

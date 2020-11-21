@@ -122,9 +122,7 @@ class _HomePageState extends State<HomePage> {
                   title: 'Vegitables',
                   tag: 'Vegitable'),
               makeCategory(
-                  catImage: 'images/fruits.jpg',
-                  title: 'Fruits',
-                  tag: 'Fruits'),
+                  catImage: 'images/fruits.jpg', title: 'Fruits', tag: 'Fruit'),
               makeCategory(
                   catImage: 'images/meats.jpg',
                   title: 'Fresh Meat',
