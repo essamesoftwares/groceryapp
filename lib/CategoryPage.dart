@@ -134,8 +134,8 @@ class _CategoryPageState extends State<CategoryPage> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    height: 140,
-                    width: 160,
+                    height: 130,
+                    width: 170,
                     child: Image.network(
                       image,
                       fit: BoxFit.cover,
@@ -162,7 +162,7 @@ class _CategoryPageState extends State<CategoryPage> {
             ),
             Center(
               child: Text(
-                "$kgs kg/kgs Rs. $price",
+                "$kgs kgs/pkgs Rs. $price",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
