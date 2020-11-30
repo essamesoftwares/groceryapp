@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:groceryapp/Widgets/widget.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -10,7 +12,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: new Text("Profile"),
+        child: new Text("My Profile"),
       ),
     );
   }

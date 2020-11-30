@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:groceryapp/Tools/Products.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class CategoryPage extends StatefulWidget {
   final String title;
@@ -30,15 +31,15 @@ class _CategoryPageState extends State<CategoryPage> {
       productList.clear();
       for (var individualKey in KEYS) {
         Products products = new Products(
-          DATA[individualKey]['category'],
-          DATA[individualKey]['pName'],
-          DATA[individualKey]['price'],
-          DATA[individualKey]['pid'],
-          DATA[individualKey]['image'],
-          DATA[individualKey]['type'],
-          DATA[individualKey]['description'],
-          DATA[individualKey]['kgs'],
-        );
+            DATA[individualKey]['category'],
+            DATA[individualKey]['pName'],
+            DATA[individualKey]['price'],
+            DATA[individualKey]['pid'],
+            DATA[individualKey]['image'],
+            DATA[individualKey]['type'],
+            DATA[individualKey]['description'],
+            DATA[individualKey]['qty'],
+            DATA[individualKey]['qtyType']);
         productList.add(products);
       }
       setState(() {
@@ -106,7 +107,8 @@ class _CategoryPageState extends State<CategoryPage> {
                         productList[index].image,
                         productList[index].type,
                         productList[index].description,
-                        productList[index].kgs,
+                        productList[index].qty,
+                        productList[index].qtyType,
                       );
                     })),
       ),
@@ -121,13 +123,14 @@ class _CategoryPageState extends State<CategoryPage> {
     String image,
     String type,
     String description,
-    String kgs,
+    String qty,
+    String qtyType,
   ) {
     return GestureDetector(
       onTap: () {},
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: ListView(
+        child: Column(
           children: <Widget>[
             ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -144,31 +147,89 @@ class _CategoryPageState extends State<CategoryPage> {
                 ],
               ),
             ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                description,
+                style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    fontSize: 8,
+                    color: Colors.black54),
+              ),
+            ),
+            SizedBox(height: 2),
             Text(
-              description,
+              pName,
               style: TextStyle(
-                  fontStyle: FontStyle.italic,
-                  fontSize: 8,
-                  color: Colors.black54),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 13,
+                  color: Colors.black),
             ),
-            Center(
-              child: Text(
-                pName,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Colors.black),
+            SizedBox(height: 2),
+            Flexible(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: RaisedButton(
+                    color: Colors.pink[300],
+                    child: Text(
+                      'Add',
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    onPressed: () {
+                      Alert(
+                          context: context,
+                          title: "Add Items",
+                          content: Column(
+                            children: <Widget>[
+                              Center(
+                                child: Text(
+                                  "$pName ($qty $qtyType): Rs. $price",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      color: Colors.black),
+                                ),
+                              ),
+                              // TextField(
+                              //   keyboardType: TextInputType.number,
+                              //   decoration: InputDecoration(
+                              //     icon: Icon(
+                              //       Icons.add_shopping_cart_rounded,
+                              //       color: Colors.orangeAccent,
+                              //     ),
+                              //     labelText: 'Enter Quantity',
+                              //   ),
+                              // ),
+                              new DropdownButton<String>(
+                                items: <String>['A', 'B', 'C', 'D']
+                                    .map((String value) {
+                                  return new DropdownMenuItem<String>(
+                                    value: value,
+                                    child: new Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (_) {},
+                              )
+                            ],
+                          ),
+                          buttons: [
+                            DialogButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Proceed",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                              color: Colors.orangeAccent,
+                            )
+                          ]).show();
+                    }),
               ),
             ),
-            Center(
-              child: Text(
-                "$kgs kgs/pkgs Rs. $price",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
-                    color: Colors.black),
-              ),
-            )
           ],
         ),
       ),

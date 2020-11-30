@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:groceryapp/HomePage.dart';
 import 'package:groceryapp/MyCartPage.dart';
 import 'package:groceryapp/OrderHistoryPage.dart';
+import 'package:groceryapp/PaymentPage.dart';
 import 'package:groceryapp/ProfilePage.dart';
 import 'package:groceryapp/Tools/Authentication.dart';
 
@@ -21,6 +22,7 @@ class _StartUpPageState extends State<StartUpPage> {
     HomePage(),
     MyCartPage(),
     OrderHistoryPage(),
+    PaymentPage(),
     ProfilePage()
   ];
   @override
@@ -44,6 +46,8 @@ class _StartUpPageState extends State<StartUpPage> {
                 icon: Icon(Icons.shopping_cart), title: new Text("My Cart")),
             BottomNavigationBarItem(
                 icon: Icon(Icons.list), title: new Text("My Orders")),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.payment), title: new Text("Payment")),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person), title: new Text("Profile")),
           ],
